@@ -24,15 +24,15 @@ configured:
 
 The following content types are controlled (associated IDs and names):
 
-1. `other`
-2. `script`
-3. `image`
-4. `stylesheet`
-5. `object`
-11. `xmlhttprequest`
-12. `object_subrequest`
-14. `font`
-15. `media`
+- ` 1: other`
+- ` 2: script`
+- ` 3: image`
+- ` 4: stylesheet`
+- ` 5: object`
+- `11: xmlhttprequest`
+- `12: object_subrequest`
+- `14: font`
+- `15: media`
 
 By default all requests are accepted. In order to create new rules, you must
 create a file called `custom_policies.json` and add it to your Conkeror
@@ -46,23 +46,35 @@ The rules are written using `JSON` and use the following format:
 ### Examples
 
 - Reject all javascript requests
+    
+    ```
     { "2" : { "*" : { "*" : "REJECT" }}}
+    ```
 
-- Reject all javascript requests, but allow from Github:
+- Reject all javascript requests, but allow from github.com:
+    
+    ```
     { "2" : { "*"             : { "*" : "REJECT" },
               "github.com"    : { "*" : "ACCEPT" }}}
+    ```
 
 - Reject all image requests, but allow from stackoverflow.com to cdn.sstatic.net:
+    
+    ```
     { "3" : { "*"                 : { "*"               : "REJECT" },
               "stackoverflow.com" : { "cdn.sstatic.net" : "ACCEPT" }}}
+    ```
 
 - Combine above rules:
+    
+    ```
     {
       "2" : { "*"                 : { "*"               : "REJECT" },
               "github.com"        : { "*"               : "ACCEPT" }},
       "3" : { "*"                 : { "*"               : "REJECT" },
               "stackoverflow.com" : { "cdn.sstatic.net" : "ACCEPT" }}
     }
+    ```
 
 ### Note
 
