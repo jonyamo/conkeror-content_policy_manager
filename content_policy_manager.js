@@ -48,14 +48,15 @@ var content_policy_manager = (function () {
     };
 
     var init_hooks = function () {
+        add_hook("content_policy_hook", content_policy_bytype);
         add_hook("content_buffer_finished_loading_hook", reset);
     };
 
-    var init_keybinds = function() {
+    var init_commands = function () {
         interactive("content-policy-reload",
                     "Reload custom content policies.",
                     function (I) {
-                        load_custom_policies();
+                        content_policy_manager.reload();
                         I.window.minibuffer.message("Custom policies reloaded.");
                     });
     };
@@ -191,7 +192,7 @@ var content_policy_manager = (function () {
     return {
         init: function () {
             init_hooks();
-            init_keybinds();
+            init_commands();
             init_user_variables();
             init_filtered_content_types();
             load_content_policies();
